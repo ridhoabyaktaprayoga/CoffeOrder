@@ -13,7 +13,14 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Shield } from 'lucide-react';
+import {
+    BookOpen,
+    Folder,
+    LayoutGrid,
+    Shield,
+    ShoppingCart,
+    Utensils,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const footerNavItems: NavItem[] = [
@@ -39,11 +46,29 @@ export function AppSidebar() {
             href: dashboard(),
             icon: LayoutGrid,
         },
-        ...(isAdmin ? [{
-            title: 'Admin',
-            href: '/admin',
-            icon: Shield,
-        }] : []),
+        ...(isAdmin
+            ? []
+            : [
+                  {
+                      title: 'Menu',
+                      href: '/menu',
+                      icon: Utensils,
+                  },
+              ]),
+        {
+            title: 'Orders',
+            href: '/orders',
+            icon: ShoppingCart,
+        },
+        ...(isAdmin
+            ? [
+                  {
+                      title: 'Admin',
+                      href: '/admin',
+                      icon: Shield,
+                  },
+              ]
+            : []),
     ];
     return (
         <Sidebar collapsible="icon" variant="inset">

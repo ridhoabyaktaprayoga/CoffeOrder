@@ -38,5 +38,9 @@ class DatabaseSeeder extends Seeder
                 'role_id' => 1, // user
             ]
         );
+
+        $this->call(OrderSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(MenuItemSeeder::class);
     }
 }

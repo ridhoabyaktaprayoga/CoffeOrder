@@ -48,3 +48,21 @@ export interface User {
     role?: Role;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface OrderItem {
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+export interface Order {
+    id: number;
+    user_id: number;
+    items: OrderItem[];
+    total_amount: number;
+    status: 'pending' | 'processing' | 'completed' | 'cancelled';
+    notes?: string;
+    created_at: string;
+    updated_at: string;
+    user?: User;
+}
