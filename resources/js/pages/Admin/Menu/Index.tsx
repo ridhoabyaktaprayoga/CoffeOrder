@@ -26,6 +26,7 @@ interface MenuItem {
     category_id: number;
     category: Category;
     is_available: boolean;
+    image: string | null;
     created_at: string;
     updated_at: string;
 }
@@ -58,8 +59,12 @@ export default function Index({ menuItems }: Props) {
 
     const toggleAvailability = (item: MenuItem) => {
         router.put(`/admin/menu/${item.id}`, {
-            ...item,
+            name: item.name,
+            description: item.description,
+            price: item.price,
+            category_id: item.category_id,
             is_available: !item.is_available,
+            image: item.image,
         });
     };
 
@@ -112,6 +117,7 @@ export default function Index({ menuItems }: Props) {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
+                                        <TableHead>Image</TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Description</TableHead>
                                         <TableHead>Price</TableHead>
@@ -122,6 +128,22 @@ export default function Index({ menuItems }: Props) {
                                 <TableBody>
                                     {categoryItems.map((item) => (
                                         <TableRow key={item.id}>
+                                            <TableCell>
+                                                {item.image ? (
+                                                    <img
+                                                        src={`/storage/${item.image}`}
+                                                        alt={item.name}
+                                                        className="h-12 w-12 rounded-md object-cover"
+                                                        onError={(e) => {
+                                                            e.currentTarget.style.display = 'none';
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                                                        No Image
+                                                    </div>
+                                                )}
+                                            </TableCell>
                                             <TableCell className="font-medium">
                                                 {item.name}
                                             </TableCell>

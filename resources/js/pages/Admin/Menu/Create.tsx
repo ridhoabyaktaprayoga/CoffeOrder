@@ -59,6 +59,7 @@ export default function Create({ categories }: Props) {
         is_available: true,
         image: null as File | null,
     });
+    const [imagePreview, setImagePreview] = useState<string>('/storage/menu-items/defautfoodimage.png');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -70,7 +71,7 @@ export default function Create({ categories }: Props) {
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         formDataToSend.append('category_id', formData.category_id);
-        formDataToSend.append('is_available', formData.is_available.toString());
+        formDataToSend.append('is_available', formData.is_available ? '1' : '0');
         if (formData.image) {
             formDataToSend.append('image', formData.image);
         }
@@ -84,10 +85,29 @@ export default function Create({ categories }: Props) {
         field: string,
         value: string | boolean | File | null,
     ) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
+        if (field === 'image') {
+            if (value instanceof File) {
+                setFormData((prev) => ({
+                    ...prev,
+                    [field]: value,
+                }));
+                // Create preview URL for selected file
+                const previewUrl = URL.createObjectURL(value);
+                setImagePreview(previewUrl);
+            } else {
+                // No file selected, reset to default
+                setFormData((prev) => ({
+                    ...prev,
+                    [field]: null,
+                }));
+                setImagePreview('/storage/menu-items/defautfoodimage.png');
+            }
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [field]: value,
+            }));
+        }
     };
 
     return (
@@ -195,7 +215,7 @@ export default function Create({ categories }: Props) {
                                     onChange={(e) =>
                                         handleInputChange(
                                             'image',
-                                            e.target.files?.[0] || '',
+                                            e.target.files?.[0] || null,
                                         )
                                     }
                                 />
@@ -203,6 +223,18 @@ export default function Create({ categories }: Props) {
                                     Upload a high-quality image of the menu item
                                     (JPEG, PNG, JPG, GIF - Max 2MB)
                                 </p>
+                                {imagePreview && (
+                                    <div className="mt-2">
+                                        <img
+                                            src={imagePreview}
+                                            alt="Preview"
+                                            className="h-32 w-32 rounded-md object-cover"
+                                        />
+                                        <p className="mt-1 text-sm text-muted-foreground">
+                                            Image preview
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="grid gap-4 md:grid-cols-2">

@@ -51,8 +51,12 @@ class MenuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('menu-items', 'public');
+            $originalName = $request->file('image')->getClientOriginalName();
+            $imagePath = $request->file('image')->storeAs('menu-items', $originalName, 'public');
             $validated['image'] = $imagePath;
+        } else {
+            // Use default image if no image is uploaded
+            $validated['image'] = 'menu-items/defautfoodimage.png';
         }
 
         MenuItem::create($validated);
@@ -99,12 +103,15 @@ class MenuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($menuItem->image && \Storage::disk('public')->exists($menuItem->image)) {
+            // Delete old image if exists and it's not the default image
+            if ($menuItem->image &&
+                $menuItem->image !== 'menu-items/defautfoodimage.png' &&
+                \Storage::disk('public')->exists($menuItem->image)) {
                 \Storage::disk('public')->delete($menuItem->image);
             }
 
-            $imagePath = $request->file('image')->store('menu-items', 'public');
+            $originalName = $request->file('image')->getClientOriginalName();
+            $imagePath = $request->file('image')->storeAs('menu-items', $originalName, 'public');
             $validated['image'] = $imagePath;
         }
 

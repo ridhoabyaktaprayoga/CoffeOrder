@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->get();
         return Inertia::render('Menu/Index', [
             'menuItems' => $menuItems,
+            'timestamp' => now()->timestamp, // Force refresh
         ]);
     })->name('menu')->middleware('role:user');
 

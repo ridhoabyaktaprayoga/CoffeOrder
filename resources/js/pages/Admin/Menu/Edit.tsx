@@ -73,6 +73,7 @@ export default function Edit({ menuItem, categories }: Props) {
         is_available: menuItem.is_available,
         image: null as File | null,
     });
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -99,10 +100,20 @@ export default function Edit({ menuItem, categories }: Props) {
         field: string,
         value: string | boolean | File | null,
     ) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
+        if (field === 'image' && value instanceof File) {
+            setFormData((prev) => ({
+                ...prev,
+                [field]: value,
+            }));
+            // Create preview URL
+            const previewUrl = URL.createObjectURL(value);
+            setImagePreview(previewUrl);
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [field]: value,
+            }));
+        }
     };
 
     return (
@@ -230,6 +241,18 @@ export default function Edit({ menuItem, categories }: Props) {
                                     Upload a new image to replace the current
                                     one (JPEG, PNG, JPG, GIF - Max 2MB)
                                 </p>
+                                {imagePreview && (
+                                    <div className="mt-2">
+                                        <img
+                                            src={imagePreview}
+                                            alt="New image preview"
+                                            className="h-32 w-32 rounded-md object-cover"
+                                        />
+                                        <p className="mt-1 text-sm text-muted-foreground">
+                                            New image preview
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="grid gap-4 md:grid-cols-2">

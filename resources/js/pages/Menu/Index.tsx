@@ -56,6 +56,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ menuItems }: Props) {
+    console.log('Menu items received:', menuItems); // Debug log
     const [cart, setCart] = useState<CartItem[]>([]);
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);

@@ -24,6 +24,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.50,
                 'category_id' => $categories['Coffee'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Americano',
@@ -31,6 +32,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.00,
                 'category_id' => $categories['Coffee'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Latte',
@@ -38,6 +40,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 4.50,
                 'category_id' => $categories['Coffee'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Cappuccino',
@@ -45,6 +48,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 4.00,
                 'category_id' => $categories['Coffee'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Mocha',
@@ -52,6 +56,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 5.00,
                 'category_id' => $categories['Coffee'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
 
             // Pastries
@@ -61,6 +66,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 4.00,
                 'category_id' => $categories['Pastries'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Blueberry Muffin',
@@ -68,6 +74,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.25,
                 'category_id' => $categories['Pastries'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Bagel',
@@ -75,6 +82,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.50,
                 'category_id' => $categories['Pastries'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Danish Pastry',
@@ -82,6 +90,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.75,
                 'category_id' => $categories['Pastries'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
 
             // Beverages
@@ -91,6 +100,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.75,
                 'category_id' => $categories['Beverages'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Fruit Smoothie',
@@ -98,6 +108,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 5.50,
                 'category_id' => $categories['Beverages'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
             [
                 'name' => 'Iced Tea',
@@ -105,6 +116,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 3.00,
                 'category_id' => $categories['Beverages'],
                 'is_available' => true,
+                'image' => 'menu-items/defautfoodimage.png',
             ],
         ];
 
