@@ -80,16 +80,17 @@ export default function Edit({ menuItem, categories }: Props) {
         setIsSubmitting(true);
 
         const formDataToSend = new FormData();
+        formDataToSend.append('_method', 'PUT');
         formDataToSend.append('name', formData.name);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         formDataToSend.append('category_id', formData.category_id);
-        formDataToSend.append('is_available', formData.is_available.toString());
+        formDataToSend.append('is_available', formData.is_available ? '1' : '0');
         if (formData.image) {
             formDataToSend.append('image', formData.image);
         }
 
-        router.put(`/admin/menu/${menuItem.id}`, formDataToSend, {
+        router.post(`/admin/menu/${menuItem.id}`, formDataToSend, {
             onFinish: () => setIsSubmitting(false),
         });
     };
